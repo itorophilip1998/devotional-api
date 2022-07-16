@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Save;
-use App\Http\Requests\StoreSaveRequest;
-use App\Http\Requests\UpdateSaveRequest;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Save; 
 
 class SaveController extends Controller
 {
@@ -21,7 +18,7 @@ class SaveController extends Controller
                 'topic' => 'required|string', 
                 'type' => 'required|string', 
             ]);
-     $saved=
+     $saved=Save::create(request()->all());
         return response()->json(['message' => 'Successfully  Saved Item 👍',"saved"=>$saved],200); 
     
     }
