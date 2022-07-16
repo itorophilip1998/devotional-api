@@ -17,28 +17,12 @@ class SaveController extends Controller
                 return response()->json(['message' => 'Unauthorized ⚠️'], 401);
             }  
                request()->validate([
-                'saved_user_id' => 'required|integer', 
+                'user_id' => 'required|integer', 
+                'topic' => 'required|string', 
+                'type' => 'required|string', 
             ]);
-            $user_id=auth()->user()["id"]; 
-            if( $user_id==request()->saved_user_id){
-             return response()->json(['message' => 'sorry you cannot save your self ⚠️'], 401); 
-            }
-            $dataExist=Save::where("user_id",$user_id)
-            ->where('saved_user_id',request()->saved_user_id)
-            ->first();
-
-        if(!$dataExist){
-           $user= Save::create(array_merge(
-                     request()->all(),
-                    [
-                        "user_id"=>$user_id
-                    ]
-           ));
-        return response()->json(['message' => 'Successfully Saved user 👍','saved_user'=>$user],200); 
-        } 
-       $dataExist->delete();
-        return response()->json(['message' => 'Successfully Remove Saved User 👍'],200); 
-        
+     $saved=
+        return response()->json(['message' => 'Successfully  Saved Item 👍',"saved"=>$saved],200); 
     
     }
   catch (\Throwable $th) {
@@ -56,7 +40,7 @@ class SaveController extends Controller
                 return response()->json(['message' => 'Unauthorized ⚠️'], 401);
             }  
         $data=Save::where("user_id",$user_id)->with("user")->get();
-        return response()->json(['message' => 'Successfully Loaded  Saved freelancer👍','saved'=>$data],200); 
+        return response()->json(['message' => 'Successfully Loaded  Saved Items','saved'=>$data],200); 
       } catch (\Throwable $th) {
         //   throw $th;
           return response()->json([

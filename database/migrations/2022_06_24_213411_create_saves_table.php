@@ -17,6 +17,7 @@ class CreateSavesTable extends Migration
             $table->id()->autoIncrement();  
             $table->unsignedBigInteger("user_id");    
             $table->string("topic");   
+            $table->string("type");   
             $table->timestamps();
 
                 // foreign 

@@ -9,7 +9,7 @@
 
         <section class="content">
             <p>
-                Hi   {{ $data["main"]["firstname"] }}
+                Hi   {{ $data["main"]["username"] }}
             </p>
                 <p>
                   Hi Steph, You requested to reset your password on {{ now()->format("d M Y h:m") }}.

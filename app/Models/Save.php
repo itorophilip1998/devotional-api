@@ -11,7 +11,8 @@ class Save extends Model
     use HasFactory;
         protected $fillable = [
         'topic',
-        'user_id'
+        'user_id',
+        'type'
         ];
 public function user()
   {

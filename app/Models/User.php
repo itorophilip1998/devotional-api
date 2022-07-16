@@ -3,16 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Save;
-use App\Models\Inbox;
-use App\Models\Photo;
-// use Laravel\Sanctum\HasApiTokens;
-use App\Models\Skill;
-use App\Models\Profile;
-use App\Models\Ranting;
-use App\Models\BankDetails;
-use App\Models\CardDetails;
-use App\Models\ProfileImages;
+use App\Models\Save; 
+// use Laravel\Sanctum\HasApiTokens; 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -79,7 +71,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     } 
  
-    public function savedUser()
+    public function savedItems()
     { 
           return $this->hasMany(Save::class); 
     } 

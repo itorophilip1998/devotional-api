@@ -2,13 +2,12 @@
 
 
 ### signup
-POST  {{baseApi}}/auth/signup
+POST  {{baseApi}}/auth/signin
 Content-Type: application/json
 
 {
-    "firstname":"itoro",
-    "lastname":"philip",
-    "email":"itoro@gmail.com1a",
+    "username":"itoroqqqwreewye", 
+    "email":"itoro1998@gmail.comwye",
     "password":"philip",
     "password_confirmation":"philip",
     "phone":"09024195493",

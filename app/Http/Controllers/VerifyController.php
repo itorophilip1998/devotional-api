@@ -57,7 +57,7 @@ class VerifyController extends Controller
           $user->update(["verify_token"=>$verify_token]);
            $uri=URL::to("/api/verify/$verify_token/$request->email");
            $mail_data=[
-            "subject"=>"Welcome to Freelancer",
+            "subject"=>"Welcome to Welcome to Fulga Devotional",
             "view"=>"emails.welcome",
             "main"=> $user,
             "link"=>"$uri",
