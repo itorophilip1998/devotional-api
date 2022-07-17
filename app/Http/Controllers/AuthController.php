@@ -38,7 +38,7 @@ class AuthController extends Controller
 
        try {
          $validator = Validator::make($request->all(), [
-            'username' => 'required|string|between:2,100|unique:users', 
+            'username' => 'required|string|between:2,100', 
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6' 
         ]); 
@@ -47,7 +47,7 @@ class AuthController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
         $verify_token=rand(1111,9999);
-      $user= User::create(array_merge(
+        User::create(array_merge(
                     $validator->validated(),
                     [
                     'password' => bcrypt($request->password),
@@ -69,10 +69,11 @@ class AuthController extends Controller
                         throw $th; 
                         return response()->json(['message' => 'Mail was not sent!  check email address and try again ⚠️'], 401); 
                     }
-        // return response()->json([
-        //     'message' => "User successfully registered 👍,  please verify your account 👉 <$request->email>",
-        // ], 200);
-         return $this->createNewToken($user);
+         
+         if (!$token = auth()->attempt(["email"=>request()->email,"password"=>request()->password])) {
+            return response()->json(['message' => 'Unauthorized ⚠️'], 401);
+        }
+         return $this->createNewToken($token);
        } catch (\Throwable $th) {
            throw $th;
           return response()->json([
@@ -131,7 +132,7 @@ class AuthController extends Controller
      
     protected function createNewToken($token){ 
        try {
-          $id=auth()->user(); 
+            $id=auth()->user(); 
             $authUser=User::where("id", $id["id"]) 
             ->with("savedItems")
             ->first(); 
