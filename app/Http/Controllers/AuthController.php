@@ -40,20 +40,19 @@ class AuthController extends Controller
          $validator = Validator::make($request->all(), [
             'username' => 'required|string|between:2,100|unique:users', 
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-            'phone' => 'required|string|max:14|min:5' ,
-            'role' => 'required|string|in:user' 
+            'password' => 'required|string|min:6' 
         ]); 
 
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
         $verify_token=rand(1111,9999);
-           User::create(array_merge(
+      $user= User::create(array_merge(
                     $validator->validated(),
                     [
                     'password' => bcrypt($request->password),
-                    "verify_token"=>$verify_token
+                    "verify_token"=>$verify_token,
+                    "role"=>"user"
                     ]
                     ));
            $uri=URL::to("/api/verify/$verify_token/$request->email"); 
@@ -64,17 +63,18 @@ class AuthController extends Controller
             "link"=>"$uri",
             "token"=>"$verify_token"
         ];
-    try { 
-            Mail::to(request()->email)->send(new SendMail($mail_data));
-        } catch (\Throwable $th) {   
-        //    throw $th; 
-        return response()->json(['message' => 'Mail was not sent!  check email address and try again ⚠️'], 401); 
-    }
-        return response()->json([
-            'message' => "User successfully registered 👍,  please verify your account 👉 <$request->email>",
-        ], 200);
+                    try { 
+                            Mail::to(request()->email)->send(new SendMail($mail_data));
+                        } catch (\Throwable $th) {   
+                        throw $th; 
+                        return response()->json(['message' => 'Mail was not sent!  check email address and try again ⚠️'], 401); 
+                    }
+        // return response()->json([
+        //     'message' => "User successfully registered 👍,  please verify your account 👉 <$request->email>",
+        // ], 200);
+         return $this->createNewToken($user);
        } catch (\Throwable $th) {
-        //    throw $th;
+           throw $th;
           return response()->json([
            'message' => 'This error is from the backend, please contact the backend developer'],500);
         
@@ -143,7 +143,7 @@ class AuthController extends Controller
             'user' =>$authUser
         ]);
        } catch (\Throwable $th) {
-        //    throw $th;
+           throw $th;
            return response()->json([
            'message' => 'This error is from the backend, please contact the backend developer'],500);
        }    }
