@@ -44,3 +44,10 @@ Route::group([
     Route::get('/get/{user_id}', [SaveController::class, 'get']); 
  });
   
+ Route::group([ 
+    'prefix' => 'subscribe'
+], function ($router) {
+    Route::post('/add', [SaveController::class, 'add']); 
+    Route::get('/verify', [SaveController::class, 'get']); 
+ });
+  
