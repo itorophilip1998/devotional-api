@@ -3,7 +3,7 @@
 
 
 ### signup
-POST  {{baseApi}}/auth/signin
+POST  {{baseApi}}/auth/signup
 Content-Type: application/json
 
 {
