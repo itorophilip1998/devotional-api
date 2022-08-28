@@ -16,6 +16,7 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "paypal/rest-api-sdk-php": "^1.14",
+        "php-open-source-saver/jwt-auth": "^1.4",
         "srmklive/paypal": "~3.0",
         "tymon/jwt-auth": "^1.0"
     },

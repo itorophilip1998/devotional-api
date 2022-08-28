@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SaveController; 
 use App\Http\Controllers\VerifyController; 
-use App\Http\Controllers\PasswordController; 
+use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\SubscribeController;
+
 //  Auth route
 Route::group([
     'middleware' => 'api',
@@ -15,6 +17,7 @@ Route::group([
     Route::post('/signout', [AuthController::class, 'signout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user', [AuthController::class, 'userProfile']);       
+    Route::post('/subscribe', [SubscribeController::class, 'subscribe']);       
 }); 
 
  //  Verify route
@@ -44,10 +47,4 @@ Route::group([
     Route::get('/get/{user_id}', [SaveController::class, 'get']); 
  });
   
- Route::group([ 
-    'prefix' => 'subscribe'
-], function ($router) {
-    Route::post('/add', [SaveController::class, 'add']); 
-    Route::get('/verify', [SaveController::class, 'get']); 
- });
   
