@@ -1,13 +1,14 @@
-@baseApi=http://localhost:8000/api
+@baseApi=https://devotional-api.herokuapp.com/api
+# @baseApi=http://localhost:8000/api
 
 
 ### signup
-POST  {{baseApi}}/auth/signin
+POST  {{baseApi}}/auth/signup
 Content-Type: application/json
 
 {
     "username":"itoroqqqwreewye", 
-    "email":"itoro1998@gmail.comwye",
+    "email":"itoro1998@gmail.comwyewwq",
     "password":"philip",
     "password_confirmation":"philip",
     "phone":"09024195493",
