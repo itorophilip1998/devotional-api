@@ -8,7 +8,8 @@ use App\Models\User;
 class SubscribeController extends Controller
 {
   public function subscribe()
-  {
+  { 
+
     try {
       if (!auth()->check()) {
         return response()->json(['message' => 'Unauthorized ⚠️'], 401);
