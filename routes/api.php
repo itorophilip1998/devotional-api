@@ -17,8 +17,11 @@ Route::group([
     Route::post('/signout', [AuthController::class, 'signout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user', [AuthController::class, 'userProfile']);       
-    Route::post('/subscribe', [SubscribeController::class, 'subscribe']);       
-}); 
+});
+
+// subscribe
+Route::post('/subscribe', [SubscribeController::class, 'subscribe']);       
+
 
  //  Verify route
 Route::group([
